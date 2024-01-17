@@ -1,0 +1,42 @@
+{
+  "name": "gamekeyzone-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "preinstall": "npx only-allow pnpm"
+  },
+  "dependencies": {
+    "@paypal/react-paypal-js": "^8.1.3",
+    "@tanstack/react-table": "^8.11.3",
+    "classnames": "^2.5.1",
+    "firebase": "^10.7.1",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "react-router-dom": "^6.20.1",
+    "react-spinners": "^0.13.8",
+    "sonner": "^1.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "autoprefixer": "^10.4.16",
+    "blurhash": "^2.0.5",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "postcss": "^8.4.32",
+    "react-blurhash": "^0.3.0",
+    "react-lazy-load-image-component": "^1.6.0",
+    "tailwindcss": "^3.3.6",
+    "vite": "^5.0.8"
+  }
+}
