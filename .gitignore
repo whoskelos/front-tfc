@@ -22,3 +22,6 @@ src/.env
 *.njsproj
 *.sln
 *.sw?
+firebase.json
+firestore.rules
+firestore.indexes.json
