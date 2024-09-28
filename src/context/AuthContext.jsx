@@ -3,8 +3,8 @@
 import { createContext, useEffect, useState } from "react"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth"
 import { auth } from "../firebase.js"
-import { firestore } from "../firebase.js"
-import { doc, getDoc, setDoc } from "firebase/firestore"
+import { firestore as db } from "../firebase.js"
+import { doc, getDoc, setDoc, collection, addDoc } from "firebase/firestore"
 export const AuthContext = createContext()
 
 function AuthProvider({ children }) {
@@ -16,8 +16,11 @@ function AuthProvider({ children }) {
             .then((firebaseUser) => {
                 return firebaseUser
             })
-        const docRef = doc(firestore, `usuarios/${userInfo.user.uid}`)
-        setDoc(docRef, { email, password, rol: 'user' })
+        const docRef = await setDoc(doc(db, "usuarios", userInfo.user.uid), {
+            email,
+            password,
+            rol: 'user'
+        });
     }
 
     const signIn = (email, password) =>
@@ -28,10 +31,15 @@ function AuthProvider({ children }) {
     const resetPassword = (email) => sendPasswordResetEmail(auth, email)
 
     const getRol = async (uid) => {
-        const docuRef = doc(firestore, `usuarios/${uid}`)
-        const encryptedDoc = await getDoc(docuRef);
-        const finalInfo = encryptedDoc.data().rol
-        return finalInfo;
+        const docuRef = doc(db, "usuarios", uid);
+        const docSnap = await getDoc(docuRef);
+        if (docSnap.exists()) {
+            const rol = docSnap.data().rol
+            return rol;
+          } else {
+            // docSnap.data() will be undefined in this case
+            throw new Error('User not found');
+          }
     }
 
 
